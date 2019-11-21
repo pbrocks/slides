@@ -23,19 +23,8 @@
     callRevealApi('next');
   });
 
-  const editorButton = document.querySelector('#editor');
-
-  editorButton.addEventListener('click', () => {
-    const href = editorButton.getAttribute('data-href');
-    if (href) {
-      window.opener.location.href = href;
-      window.close();
-    }
-  });
-
   window.opener.addEventListener('beforeunload', () => {
     window.close();
-    console.log( 'test' );
   });
 
   window.addEventListener('message', function (event) {
@@ -52,7 +41,6 @@
       } else if (data.type === 'state') {
         handleStateMessage(data);
       } else if (data.type === 'return') {
-        console.log( data, pendingCalls );
         pendingCalls[data.callId](data.result);
         // delete pendingCalls[data.callId];
       }

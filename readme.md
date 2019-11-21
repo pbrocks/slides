@@ -1,11 +1,11 @@
-# Slides
+# Slides & Presentations
 
-    Contributors:      iseulde, wordpressdotorg
+    Contributors:      ellatrix, wordpressdotorg
     Tags:              presentations, slides, powerpoint, keynote
-    Requires at least: 5.2
+    Requires at least: 5.3
     Requires PHP:      5.6
     Tested up to:      5.3
-    Stable tag:        0.0.37
+    Stable tag:        0.0.39
     License:           GPL-2.0-or-later
     License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +13,7 @@ Allows you to create presentations with the WordPress block editor.
 
 ## Description
 
-Requires the latest [Gutenberg](https://wordpress.org/plugins/gutenberg/) release!
+**This plugin requires WordPress version 5.3 or higher! It works best if you also have the [Gutenberg](https://wordpress.org/plugins/gutenberg/) plugin installed and up-to-date.**
 
 Report issues, or collaborate, on [Github](https://github.com/ellatrix/slides/issues).
 

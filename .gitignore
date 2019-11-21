@@ -1,5 +1,3 @@
-.cache
-.svn
-.svnignore
-index.js*
-node_modules
+/.cache
+/.svn
+/node_modules

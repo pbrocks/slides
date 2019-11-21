@@ -61,47 +61,6 @@
 			background: #000;
 		}
 
-		.reveal {
-			color: <?php echo get_post_meta( get_the_ID(), 'presentation-color', true ) ?: '#000'; ?>;
-			font-size: <?php echo get_post_meta( get_the_ID(), 'presentation-font-size', true ) ?: '42'; ?>px;
-			font-family: <?php echo get_post_meta( get_the_ID(), 'presentation-font-family', true ) ?: 'Helvetica, sans-serif'; ?>;
-		}
-
-		.reveal h1,
-		.reveal h2,
-		.reveal h3,
-		.reveal h4,
-		.reveal h5,
-		.reveal h6 {
-			font-family: <?php echo get_post_meta( get_the_ID(), 'presentation-font-family-heading', true ) ?: 'inherit'; ?>;
-			font-weight: <?php echo get_post_meta( get_the_ID(), 'presentation-font-weight-heading', true ) ?: 'inherit'; ?>;
-		}
-
-		/* Extra specificity to override reveal background. */
-		.reveal .slide-background {
-			background-color: <?php echo get_post_meta( get_the_ID(), 'presentation-background-color', true ) ?: '#fff'; ?>;
-			background-image: <?php echo get_post_meta( get_the_ID(), 'presentation-background-gradient', true ) ?: 'none'; ?>;
-		}
-
-		/* If a background color is set, disable the global gradient. */
-		.reveal .slide-background[style*="background-color"] {
-			background-image: none;
-		}
-
-		.reveal .slide-background .slide-background-content {
-			background-image: url("<?php echo get_post_meta( get_the_ID(), 'presentation-background-url', true ) ?: 'none'; ?>");
-			background-position: <?php echo get_post_meta( get_the_ID(), 'presentation-background-position', true ) ?: '50% 50%'; ?>;
-			opacity: <?php echo (int) get_post_meta( get_the_ID(), 'presentation-background-opacity', true ) / 100 ?: '1'; ?>;
-		}
-
-		.reveal .slides section.wp-block-slide-slide {
-			top: auto !important;
-			padding-top: <?php echo get_post_meta( get_the_ID(), 'presentation-vertical-padding', true ) ?: '0.2em'; ?> !important;
-			padding-bottom: <?php echo get_post_meta( get_the_ID(), 'presentation-vertical-padding', true ) ?: '0.2em'; ?> !important;
-			padding-left: <?php echo get_post_meta( get_the_ID(), 'presentation-horizontal-padding', true ) ?: '0.2em'; ?> !important;
-			padding-right: <?php echo get_post_meta( get_the_ID(), 'presentation-horizontal-padding', true ) ?: '0.2em'; ?> !important;
-		}
-
 		.reveal .slides {
 			text-align: inherit;
 			justify-content: center;
@@ -160,6 +119,10 @@
 			display: flex;
 		}
 
+		.wp-block-media-text.has-media-on-the-right {
+			flex-direction: row-reverse;
+		}
+
 		.wp-block-media-text__media,
 		.wp-block-media-text__content {
 			flex-basis: 50%;
@@ -174,22 +137,68 @@
 			max-height: 100vh;
 		}
 
+		.reveal[data-background-transition="none"] .slide-background {
+			transition: none;
+		}
+
+		/* Dynamic */
+
+		.reveal {
+			color: <?php echo sanitize_hex_color( get_post_meta( get_the_ID(), 'presentation-color', true ) ) ?: '#000'; ?>;
+			font-size: <?php echo (int) get_post_meta( get_the_ID(), 'presentation-font-size', true ) ?: 42; ?>px;
+			font-family: <?php echo esc_html( get_post_meta( get_the_ID(), 'presentation-font-family', true ) ) ?: 'Helvetica, sans-serif'; ?>;
+		}
+
+		.reveal h1,
+		.reveal h2,
+		.reveal h3,
+		.reveal h4,
+		.reveal h5,
+		.reveal h6 {
+			font-family: <?php echo esc_html( get_post_meta( get_the_ID(), 'presentation-font-family-heading', true ) ) ?: 'inherit'; ?>;
+			font-weight: <?php echo esc_html( get_post_meta( get_the_ID(), 'presentation-font-weight-heading', true ) ) ?: 'inherit'; ?>;
+		}
+
+		/* Extra specificity to override reveal background. */
+		.reveal .slide-background {
+			background-color: <?php echo sanitize_hex_color( get_post_meta( get_the_ID(), 'presentation-background-color', true ) ) ?: '#fff'; ?>;
+			background-image: <?php echo esc_html( get_post_meta( get_the_ID(), 'presentation-background-gradient', true ) ) ?: 'none'; ?>;
+		}
+
+		/* If a background color is set, disable the global gradient. */
+		.reveal .slide-background[style*="background-color"] {
+			background-image: none;
+		}
+
+		.reveal .slide-background .slide-background-content {
+			background-image: url("<?php echo esc_html( get_post_meta( get_the_ID(), 'presentation-background-url', true ) ) ?: 'none'; ?>");
+			background-position: <?php echo esc_html( get_post_meta( get_the_ID(), 'presentation-background-position', true ) ) ?: '50% 50%'; ?>;
+			opacity: <?php echo (int) get_post_meta( get_the_ID(), 'presentation-background-opacity', true ) / 100 ?: 1; ?>;
+		}
+
+		.reveal .slides section.wp-block-slide-slide {
+			top: auto !important;
+			padding-top: <?php echo esc_html( get_post_meta( get_the_ID(), 'presentation-vertical-padding', true ) ) ?: '0.2em'; ?> !important;
+			padding-bottom: <?php echo esc_html( get_post_meta( get_the_ID(), 'presentation-vertical-padding', true ) ) ?: '0.2em'; ?> !important;
+			padding-left: <?php echo esc_html( get_post_meta( get_the_ID(), 'presentation-horizontal-padding', true ) ) ?: '0.2em'; ?> !important;
+			padding-right: <?php echo esc_html( get_post_meta( get_the_ID(), 'presentation-horizontal-padding', true ) ) ?: '0.2em'; ?> !important;
+		}
+
 		.presentation-contain .alignfull {
-			margin: 0 calc( -50px - <?php echo get_post_meta( get_the_ID(), 'presentation-horizontal-padding', true ) ?: '0.2em'; ?> );
+			margin: 0 calc( -50px - <?php echo esc_html( get_post_meta( get_the_ID(), 'presentation-horizontal-padding', true ) ) ?: '0.2em'; ?> );
 			max-width: none;
 		}
 
 		.reveal .slides > section,
 		.reveal .slides > section > section {
-			padding: <?php echo get_post_meta( get_the_ID(), 'presentation-vertical-padding', true ) ?: '0.2em'; ?> 0;
-		}
-
-		.reveal[data-background-transition="none"] .slide-background {
-			transition: none;
+			padding: <?php echo esc_html( get_post_meta( get_the_ID(), 'presentation-vertical-padding', true ) ) ?: '0.2em'; ?> 0;
 		}
 	</style>
 	<style>
-		<?php echo get_post_meta( get_the_ID(), 'presentation-css', true ); ?>
+		<?php
+			// Allow quotes.
+			echo str_replace( '<', '', get_post_meta( get_the_ID(), 'presentation-css', true ) );
+		?>
 	</style>
 </head>
 <body>
@@ -199,140 +208,5 @@
 		</div>
 	</div>
 	<?php wp_footer(); ?>
-	<script>
-		const contain = <?php echo get_post_meta( get_the_ID(), 'presentation-contain', true ) ?: 'false'; ?>;
-
-		Reveal.initialize( {
-			transition: '<?php echo get_post_meta( get_the_ID(), 'presentation-transition', true ) ?: 'none'; ?>',
-			backgroundTransition: '<?php echo get_post_meta( get_the_ID(), 'presentation-background-transition', true ) ?: 'none'; ?>',
-			transitionSpeed: '<?php echo get_post_meta( get_the_ID(), 'presentation-transition-speed', true ) ?: 'default'; ?>',
-			controls: <?php echo get_post_meta( get_the_ID(), 'presentation-controls', true ) ?: 'false'; ?>,
-			progress: <?php echo get_post_meta( get_the_ID(), 'presentation-progress', true ) ?: 'false'; ?>,
-			hash: true,
-			history: true,
-			preloadIframes: true,
-			hideAddressBar: true,
-			height: 720,
-			width: <?php echo get_post_meta( get_the_ID(), 'presentation-width', true ) ?: '960'; ?>,
-			margin: contain ? 0 : 0.08,
-			keyboard: {
-				38: 'prev',
-				40: 'next',
-			},
-			overview: false,
-			// We center in CSS.
-			center: false,
-			pdfMaxPagesPerSlide: 1,
-			// minScale: 1,
-			// maxScale: 1,
-		} );
-		document.querySelectorAll( '.wp-block-media-text' ).forEach( ( element ) => {
-			const percentage = parseInt( element.style.gridTemplateColumns, 10 );
-
-			if ( percentage === 50 ) {
-				return;
-			}
-
-			element.querySelector( '.wp-block-media-text__media' )
-				.style.flexBasis = `${ percentage }%`;
-			element.querySelector( '.wp-block-media-text__content' )
-				.style.flexBasis = `${ 100 - percentage }%`;
-		} );
-
-		function backgroundSvg( event ) {
-			const svg = event.currentSlide.getAttribute( 'data-background-svg' );
-
-			if ( ! svg ) {
-				return;
-			}
-
-			const targetBackgound = document.querySelectorAll( '.slide-background' )[ event.indexh ];
-
-			if ( ! targetBackgound ) {
-				return;
-			}
-
-			window.setTimeout( () => {
-				targetBackgound.innerHTML = svg;
-			} );
-		}
-
-		Reveal.addEventListener( 'ready', backgroundSvg );
-		Reveal.addEventListener( 'slidechanged', backgroundSvg );
-
-		if ( contain ) {
-			const slidesElement = document.querySelector( '.slides' );
-			const backgroundsElement = document.querySelector( '.backgrounds' );
-
-			slidesElement.appendChild( backgroundsElement );
-			document.documentElement.classList.add( 'presentation-contain' );
-		} else {
-			document.querySelectorAll( '.alignfull' ).forEach( ( element ) => {
-				element.style.width = 100 / Reveal.getScale() + 'vw';
-				element.style.maxHeight = 84 / Reveal.getScale() + 'vh';
-			} );
-			Reveal.addEventListener( 'ready', function( event ) {
-				document.querySelectorAll( '.alignfull' ).forEach( ( element ) => {
-					element.style.width = 100 / Reveal.getScale() + 'vw';
-					element.style.maxHeight = 84 / Reveal.getScale() + 'vh';
-				} );
-			} );
-			Reveal.addEventListener( 'resize', function( event ) {
-				document.querySelectorAll( '.alignfull' ).forEach( ( element ) => {
-					element.style.width = 100 / event.scale + 'vw';
-					element.style.maxHeight = 100 / event.scale + 'vh';
-				} );
-			} );
-		}
-
-		const autoplay = document.querySelectorAll('[autoplay]');
-
-		autoplay.forEach( ( el ) => el.setAttribute( 'data-autoplay', 'true' ) );
-
-		// Admin bar buttons.
-		( () => {
-			const bar = document.querySelector('ul#wp-admin-bar-root-default');
-
-			if ( ! bar ) {
-				return;
-			}
-
-			const fullscreenLi = document.createElement( 'li' );
-			const speakerLi = document.createElement( 'li' );
-			const fullscreenButton = document.createElement( 'button' );
-			const speakerButton = document.createElement( 'button' );
-			const fullscreenText = document.createTextNode( 'Fullscreen' );
-			const speakerText = document.createTextNode( 'Speaker View' );
-
-			fullscreenButton.appendChild( fullscreenText );
-			fullscreenLi.appendChild( fullscreenButton );
-			fullscreenLi.classList.add( 'slide-button' );
-			bar.appendChild( fullscreenLi );
-
-			speakerButton.appendChild( speakerText );
-			speakerLi.appendChild( speakerButton );
-			speakerLi.classList.add( 'slide-button' );
-			bar.appendChild( speakerLi );
-
-			fullscreenButton.addEventListener( 'click', ( event ) => {
-				const target = document.querySelector('.reveal');
-
-				if ( target.requestFullscreen ) {
-					target.requestFullscreen();
-				} else if ( target.webkitRequestFullscreen ) {
-					target.webkitRequestFullscreen();
-				}
-
-				event.preventDefault();
-			} );
-			speakerButton.addEventListener( 'click', ( event ) => {
-				const { protocol, host, pathname, search } = window.location;
-				let url = [protocol, '//', host, pathname].join('');
-				url += search ? search + '&speaker=true' : '?speaker=true';
-				Reveal.getPlugin( 'notes' ).open(url  );
-				event.preventDefault();
-			} );
-		} )();
-	</script>
 </body>
 </html>
