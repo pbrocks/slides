@@ -11,12 +11,12 @@ const {
 const ALLOWED_MEDIA_TYPES = ['image'];
 const backgroundUrlKey = 'presentation-background-url';
 
-registerBlockType('slide/slide', {
-  title: __('Slide', 'slide'),
+registerBlockType( 'slide/slide', {
+  title: __( 'Slide', 'slide' ),
   description: __('With this blocks you can form your slide deck! You can override document level setting for each slide block.'),
   icon: 'slides',
   category: 'common',
-  keywords: [__('Presentation', 'slide')],
+  keywords: [ __('Presentation', 'slide' ) ],
   attributes: {
     notes: {
       type: 'string'
